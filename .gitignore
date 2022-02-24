@@ -70,5 +70,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+
 JARPG/.mono/metadata/ide_messaging_meta.txt
 JARPG/project.godot
+.DS_Store
