@@ -23,6 +23,11 @@ public class Movement : KinematicBody2D
         if (Input.IsActionPressed("up"))
             velocity.y = 1;
 
+        if (Input.IsActionPressed("weeeeeee"))
+            speed = 2000;
+        else
+            speed = 200;
+
         velocity = velocity.Normalized() * speed;
     }
 
