@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://_Scripts/Movement.cs" type="Script" id=1]
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/House1.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 29.5, 28.5 )
 
-[node name="Node2D" type="Node2D"]
+[node name="root" type="Node2D"]
+
+[node name="House1" parent="." instance=ExtResource( 3 )]
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 position = Vector2( 553, 305 )
