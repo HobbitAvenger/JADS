@@ -54,17 +54,27 @@ public class World {
         // Creates grids between houses
         //      Calculates midpoint between each house and the adjacent house
         //      in a specific direction (W, NW, N, NE, E, SE, S, SW)
+
+        House adjacentW;
+        House adjacentNW;
+        House adjacentN;
+        House adjacentNE;
+        House adjacentE;
+        House adjacentSE;
+        House adjacentS;
+        House adjacentSW;
+
         k = 0;
         for (int i = 0; i < worldWidthInGrids; i++) {
             for (int j = 0; j < worldHeightInGrids; j++) {
-                House adjacentW = getHouseFromGridNmbr(i - 1, j);
-                House adjacentNW = getHouseFromGridNmbr(i - 1, j - 1);
-                House adjacentN = getHouseFromGridNmbr(i, j - 1);
-                House adjacentNE = getHouseFromGridNmbr(i + 1, j - 1);
-                House adjacentE = getHouseFromGridNmbr(i + 1, j);
-                House adjacentSE = getHouseFromGridNmbr(i + 1, j + 1);
-                House adjacentS = getHouseFromGridNmbr(i, j + 1);
-                House adjacentSW = getHouseFromGridNmbr(i - 1, j + 1);
+                adjacentW = getHouseFromGridNmbr(i - 1, j);
+                adjacentNW = getHouseFromGridNmbr(i - 1, j - 1);
+                adjacentN = getHouseFromGridNmbr(i, j - 1);
+                adjacentNE = getHouseFromGridNmbr(i + 1, j - 1);
+                adjacentE = getHouseFromGridNmbr(i + 1, j);
+                adjacentSE = getHouseFromGridNmbr(i + 1, j + 1);
+                adjacentS = getHouseFromGridNmbr(i, j + 1);
+                adjacentSW = getHouseFromGridNmbr(i - 1, j + 1);
 
                 // West
                 if (adjacentW != null) {
@@ -105,33 +115,34 @@ public class World {
                     houseArray[k].borderX[1] = (int) Util.midpoint4(houseArray[k], adjacentNW, adjacentW, adjacentN)[0];
                     houseArray[k].borderY[1] = (int) Util.midpoint4(houseArray[k], adjacentNW, adjacentW, adjacentN)[1];
                 } else {
-                    houseArray[k].borderX[1] = houseArray[k].borderX[6];
-                    houseArray[k].borderY[1] = houseArray[k].borderY[0];
+                    houseArray[k].borderX[1] = houseArray[k].borderX[0];
+                    houseArray[k].borderY[1] = houseArray[k].borderY[2];
                 }
                 //      North East
                 if (adjacentN != null && adjacentNE != null && adjacentE != null) {
                     houseArray[k].borderX[3] = (int) Util.midpoint4(houseArray[k], adjacentNE, adjacentN, adjacentE)[0];
                     houseArray[k].borderY[3] = (int) Util.midpoint4(houseArray[k], adjacentNE, adjacentN, adjacentE)[1];
                 } else {
-                    houseArray[k].borderX[3] = houseArray[k].borderX[2];
-                    houseArray[k].borderY[3] = houseArray[k].borderY[0];
+                    houseArray[k].borderX[3] = houseArray[k].borderX[4];
+                    houseArray[k].borderY[3] = houseArray[k].borderY[2];
                 }
                 //      South East
                 if (adjacentS != null && adjacentSE != null && adjacentE != null) {
                     houseArray[k].borderX[5] = (int) Util.midpoint4(houseArray[k], adjacentSE, adjacentE, adjacentS)[0];
                     houseArray[k].borderY[5] = (int) Util.midpoint4(houseArray[k], adjacentSE, adjacentE, adjacentS)[1];
                 } else {
-                    houseArray[k].borderX[5] = houseArray[k].borderX[2];
-                    houseArray[k].borderY[5] = houseArray[k].borderY[4];
+                    houseArray[k].borderX[5] = houseArray[k].borderX[4];
+                    houseArray[k].borderY[5] = houseArray[k].borderY[6];
                 }
                 //      South West
                 if (adjacentS != null && adjacentSW != null && adjacentW != null) {
                     houseArray[k].borderX[7] = (int) Util.midpoint4(houseArray[k], adjacentSW, adjacentS, adjacentW)[0];
                     houseArray[k].borderY[7] = (int) Util.midpoint4(houseArray[k], adjacentSW, adjacentS, adjacentW)[1];
                 } else {
-                    houseArray[k].borderX[7] = houseArray[k].borderX[6];
-                    houseArray[k].borderY[7] = houseArray[k].borderY[4];
+                    houseArray[k].borderX[7] = houseArray[k].borderX[0];
+                    houseArray[k].borderY[7] = houseArray[k].borderY[6];
                 }
+
                 k++;
             }
         }
@@ -148,7 +159,7 @@ public class World {
                 g2D.drawPolygon(house.borderX, house.borderY, house.borderY.length);
 
                 // Draws X at house location
-                // Color already set to black from previous step
+                // Color already set to black from previous step in this case
                 g2D.drawLine(
                         house.worldXPos - 3, house.worldYPos - 3,
                         house.worldXPos + 3, house.worldYPos + 3
@@ -162,7 +173,7 @@ public class World {
     }
 
     House getHouseFromGridNmbr(int gridX, int gridY) {
-        if (gridX < 0 | gridX > worldWidthInGrids | gridY < 0 | gridY > worldHeightInGrids) {
+        if (gridX < 0 | gridX > worldWidthInGrids - 1 | gridY < 0 | gridY > worldHeightInGrids - 1) {
             return null;
         } else {
             for (House house : houseArray) {
