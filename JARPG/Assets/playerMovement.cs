@@ -14,11 +14,11 @@ public class playerMovement : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-		Vector2 playerVelocity = new Vector2.zero;
-		Consol.WriteLine("Hello World!");
+		//Vector2 playerVelocity = new Vector2.zero;
+		Debug.Log("Hello World!");
 		//var animationPlayer = $AnimationPlayer;
 	}
-
+	/*
 	// Update is called once per frame
 	void Update()
     {
@@ -49,5 +49,7 @@ public class playerMovement : MonoBehaviour
 
 
 		//playerVelocity = MoveAndSlide(playerVelocity);
+	
 	}
+	*/
 }
