@@ -27,7 +27,7 @@ public class Util {
         return midpoint(posX[0], posX[1], posY[0], posY[1]);
     }
 
-    static float[] midpoint(House house1, House house2) {
+    static float[] midpoint(CountryHouse house1, CountryHouse house2) {
         return midpoint(house1.worldXPos, house1.worldYPos, house2.worldXPos, house2.worldYPos);
     }
 
@@ -38,7 +38,7 @@ public class Util {
         );
     }
 
-    static float[] midpoint4(House house1, House house2, House house3, House house4) {
+    static float[] midpoint4(CountryHouse house1, CountryHouse house2, CountryHouse house3, CountryHouse house4) {
         return midpoint(
                 midpoint(house1.worldXPos, house1.worldYPos, house2.worldXPos, house2.worldYPos),
                 midpoint(house3.worldXPos, house3.worldYPos, house4.worldXPos, house4.worldYPos)
