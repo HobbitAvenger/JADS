@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
-{
-
+public class PlayerMovement : MonoBehaviour {
 
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
     private Animator anim;
     private Vector2 movement;
 
-    void Awake(){
+    void Awake() {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update(){
+    void Update() {
         //Input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
@@ -26,10 +24,9 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("Speed", movement.sqrMagnitude);
         
     }
-    void FixedUpdate(){
+    
+    void FixedUpdate() {
         //Movement
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-        
     }
-
 }
